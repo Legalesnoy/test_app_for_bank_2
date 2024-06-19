@@ -18,7 +18,7 @@ def mask_account_card(card_number: str) -> str:
 
     card_account=card_account.strip()
     number =  int(number_str)
-    
+
     if card_account.lower() in card_type:
         mask_account_card = get_mask_card_number(number)
     elif card_account.lower() in account_type:
@@ -27,18 +27,29 @@ def mask_account_card(card_number: str) -> str:
     return mask_account_card
 
 
-def get_data():
-    """
-    Функция преобразования даты
-    """
-    ...
+def get_data(str_with_data: str) -> str:
+    """Функция преобразования даты"""
 
-s1 = "Счет 73654108430135874305"
-s2 = "Maestro 7000 7922 8960 6361"
-s3 = "Visa Platinum 7000 7922 8960 6361"
-s4 = "Счёт 7000 7922 8960 6361"
+    data_dct = {'year'  : str_with_data[0:4],
+                'month' : str_with_data[5:7],
+                'day'   : str_with_data[8:10], }
 
-print(mask_account_card(s1))
-print(mask_account_card(s2))
-print(mask_account_card(s3))
-print(mask_account_card(s4))
+    data = '.'.join(list(data_dct.values())[::-1])
+
+
+    return data
+
+
+if __name__ == "__main__":
+     s1 = "Счет 73654108430135874305"
+     s2 = "Maestro 7000 7922 8960 6361"
+     s3 = "Visa Platinum 7000 7922 8960 6361"
+     s4 = "Счёт 7000 7922 8960 6361"
+
+
+    print(mask_account_card(s1))
+    print(mask_account_card(s2))
+    print(mask_account_card(s3))
+    print(mask_account_card(s4))
+
+    print(get_data('2018-07-11T02:26:18.671407'))
