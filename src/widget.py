@@ -1,4 +1,4 @@
-from masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(card_number: str) -> str:
@@ -48,16 +48,16 @@ def get_data(str_with_data: str) -> str:
     return data
 
 
-# if __name__ == "__main__":
-#      s1 = "Счет 73654108430135874305"
-#      s2 = "Maestro 7000 7922 8960 6361"
-#      s3 = "Visa Platinum 7000 7922 8960 6361"
-#      s4 = "Счёт 7000 7922 8960 6361"
-#
-#
-#     print(mask_account_card(s1))
-#     print(mask_account_card(s2))
-#     print(mask_account_card(s3))
-#     print(mask_account_card(s4))
-#
-#     print(get_data('2018-07-11T02:26:18.671407'))
+if __name__ == "__main__":
+     s1 = "Счет 73654108430135874305"
+     s2 = "Maestro 7000 7922 8960 6361"
+     s3 = "Visa Platinum 7000 7922 8960 6361"
+     s4 = "Счёт 7000 7922 8960 6361"
+
+
+     print(mask_account_card(s1))
+     print(mask_account_card(s2))
+     print(mask_account_card(s3))
+     print(mask_account_card(s4))
+
+     print(get_data('2018-07-11T02:26:18.671407'))
