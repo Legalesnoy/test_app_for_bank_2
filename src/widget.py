@@ -47,8 +47,9 @@ def get_data(str_with_data: str) -> str:
 
     return data
 
+
 def get_data_int(str_with_data: str) -> int:
-    """Функция преобразования даты"""
+    """Функция преобразования даты в int для правильно сортировки"""
 
     data_dct = {
         "year": int(str_with_data[0:4]),
@@ -56,21 +57,19 @@ def get_data_int(str_with_data: str) -> int:
         "day": int(str_with_data[8:10]),
     }
 
-    return data_dct["year"]*10000+data_dct["month"]*100+data_dct["day"]
-
+    return data_dct["year"] * 10000 + data_dct["month"] * 100 + data_dct["day"]
 
 
 if __name__ == "__main__":
-     s1 = "Счет 73654108430135874305"
-     s2 = "Maestro 7000 7922 8960 6361"
-     s3 = "Visa Platinum 7000 7922 8960 6361"
-     s4 = "Счёт 7000 7922 8960 6361"
+    s1 = "Счет 73654108430135874305"
+    s2 = "Maestro 7000 7922 8960 6361"
+    s3 = "Visa Platinum 7000 7922 8960 6361"
+    s4 = "Счёт 7000 7922 8960 6361"
 
+    print(mask_account_card(s1))
+    print(mask_account_card(s2))
+    print(mask_account_card(s3))
+    print(mask_account_card(s4))
 
-     print(mask_account_card(s1))
-     print(mask_account_card(s2))
-     print(mask_account_card(s3))
-     print(mask_account_card(s4))
-
-     print(get_data('2018-07-11T02:26:18.671407'))
-     print(get_data_dct('2018-07-11T02:26:18.671407'))
+    print(get_data("2018-07-11T02:26:18.671407"))
+    print(get_data_dct("2018-07-11T02:26:18.671407"))
