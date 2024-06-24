@@ -47,6 +47,18 @@ def get_data(str_with_data: str) -> str:
 
     return data
 
+def get_data_int(str_with_data: str) -> int:
+    """Функция преобразования даты"""
+
+    data_dct = {
+        "year": int(str_with_data[0:4]),
+        "month": int(str_with_data[5:7]),
+        "day": int(str_with_data[8:10]),
+    }
+
+    return data_dct["year"]*10000+data_dct["month"]*100+data_dct["day"]
+
+
 
 if __name__ == "__main__":
      s1 = "Счет 73654108430135874305"
@@ -61,3 +73,4 @@ if __name__ == "__main__":
      print(mask_account_card(s4))
 
      print(get_data('2018-07-11T02:26:18.671407'))
+     print(get_data_dct('2018-07-11T02:26:18.671407'))
