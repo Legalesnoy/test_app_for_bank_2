@@ -1,7 +1,7 @@
 from src.widget import get_data_int
 
 
-def filter_by_state(state_data: list, state: str) -> list:
+def filter_by_state(state_data: list[dict, any], state: str = "EXECUTED") -> list[dict, any]:
     """Функция выдает лист state_data с необходимым значением state"""
 
     # out_lst=[]
@@ -14,10 +14,10 @@ def filter_by_state(state_data: list, state: str) -> list:
     return list(filter(lambda x_dct: x_dct["state"] == state, state_data))
 
 
-def sort_by_date(state_data: list, in_descending_order=True) -> list:
+def sort_by_date(state_data: list[dict, any], ascending: bool = True) -> list[dict, any]:
     """Функция выдает лист state_data отсортированным по дате по умолчанию в порядке убывания"""
 
-    return sorted(state_data, key=lambda d: get_data_int(d["date"]), reverse=in_descending_order)
+    return sorted(state_data, key=lambda d: get_data_int(d["date"]), reverse=ascending)
 
 
 #
