@@ -72,4 +72,4 @@ if __name__ == "__main__":
     print(mask_account_card(s4))
 
     print(get_data("2018-07-11T02:26:18.671407"))
-    print(get_data_dct("2018-07-11T02:26:18.671407"))
+    # print(get_data_dct("2018-07-11T02:26:18.671407"))
