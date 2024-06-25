@@ -19,6 +19,8 @@ pip install -r requirements.txt
 ```commandline
 poetry install
 ```
+## Тесты: Содержит тесты функционала.
+
 ## Использование:
 
 1. ....
