@@ -11,8 +11,13 @@
 git clone https://github.com/Legalesnoy/test_app_for_bank_2.git
 ```
 2. Установите зависимости:
+используйте в зависимости от Ваших предпочтений:
 ```
 pip install -r requirements.txt
+```
+или 
+```commandline
+poetry install
 ```
 ## Использование:
 
