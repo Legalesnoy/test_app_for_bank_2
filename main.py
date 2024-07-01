@@ -1,3 +1,4 @@
+from src.generators import filter_by_currency
 from src.widget import get_data, mask_account_card
 from src.masks import get_mask_account, get_mask_card_number
 
