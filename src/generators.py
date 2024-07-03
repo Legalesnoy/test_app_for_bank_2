@@ -6,7 +6,7 @@ from src.processing import sort_by_date
 def sign(x: int) -> int:
     ''' знак числа'''
 
-    if x == 0: return 0
+    if x == 0: return 1
     return int(x / abs(x))
 
 
@@ -35,6 +35,9 @@ def card_number_generator(n_min: int, n_max: int) -> Iterable[str]:
        XXXX XXXX XXXX XXXX, где X — цифра
        диапазоны n_min, n_max
        '''
+    n_min = n_min * (n_min > 0)
+    n_max = n_max * (n_max > 0)
+
     n_max += sign(n_max - n_min)
     for i in range(n_min, n_max, sign(n_max - n_min)):
         card_number = '0' * (16 - len(str(i))) + str(i)
@@ -146,7 +149,7 @@ def card_number_generator(n_min: int, n_max: int) -> Iterable[str]:
 #     # Перевод организации
 #
 #
-#     for card_number in card_number_generator(0, 5):
+#     for card_number in card_number_generator(-1, 21):
 #         print(card_number)
 #         # 0000 0000 0000 0001
 #         # 0000 0000 0000 0002

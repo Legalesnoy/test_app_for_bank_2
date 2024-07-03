@@ -2,22 +2,24 @@ from functools import wraps
 from time import time
 
 
-def log_out(log_str: str, f_name:str="") -> None:
+def log_out(log_str: str, f_name: str = "", sep: str = " ") -> None:
+
     if f_name != "":
         with open(f_name, "a") as file:
-            file.write(log_str + "\n")
+            file.write(log_str + sep)
     else:
-        print(log_str)
+        print(log_str, end=sep)
 
 
-def timer_log(f_name: str=""):
+def timer_log(f_name: str = ""):
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):
+
             start = time()
             result = func(*args, **kwargs)
             run_time = time() - start
-            log_str = f"Время затраченное на выполнение функции {func.__name__}: {run_time} секунд"
+            log_str = f"{run_time} sec."
             log_out(log_str, f_name)
             return result
 
@@ -30,8 +32,9 @@ def name_func_log(f_name=""):
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):
+
             result = func(*args, **kwargs)
-            log_str = f"Имя фунции: {func.__name__}"
+            log_str = f"{func.__name__}"
             log_out(log_str, f_name)
             return result
 
@@ -44,8 +47,10 @@ def arguments_func_log(f_name=""):
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):
+
             result = func(*args, **kwargs)
-            log_str = f"Аргументы фунции: {*args, *kwargs}"
+            log_str = f"Inputs: {*args, *kwargs}"
+
             log_out(log_str, f_name)
             return result
 
@@ -58,14 +63,16 @@ def error_func_log(f_name=""):
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):
+
+            result = None
             try:
                 result = func(*args, **kwargs)
             except Exception as e:
-                log_str = f"Ошибка в функции {func.__name__}, {e} "
+                log_str = f"{func.__name__} error:  {e}. Inputs: {*args, *kwargs}"
             else:
-                log_str = f"Функция {func.__name__} выполнена без ошибок"
+                log_str = f"{func.__name__} ok"
 
-            log_out(log_str, f_name)
+            log_out(log_str, f_name, ", ")
             return result
 
         return wrapper2
@@ -86,10 +93,9 @@ def log(f_name=""):
         @wraps(func)
         def wrapper(*args, **kwargs):
             d1 = timer_log(f_name)
-            d2 = arguments_func_log(f_name)
-            d3 = error_func_log(f_name)
-            d4 = name_func_log(f_name)
-            result = d1(d2(d3(d4(func))))(*args, **kwargs)
+            d2 = error_func_log(f_name)
+            result = d1(d2(func))(*args, **kwargs)
+            log_out("", f_name, "\n")
 
             return result
 
@@ -98,21 +104,57 @@ def log(f_name=""):
     return wrapper1
 
 
-## проверочки:
-# @log('1.txt')
-# def div (a,b):
-#     '''dididididi'''
-#     return a/b
-# # g0 = print
-# # g1 = sleep
-# # g2 = timer_log(g0)
-# # g3 = arguments_func_log(g0)
-# # g4 = error_func_log(g0)
-# #
-# # g2(2)
-# hhh = {'k':9,7:0}
-# lst=[9,8,9]
-# # g3(f"{hhh}боьлдо{lst}")
-# div(3,hhh[7])
-# # print(f'{div(3,5)}')
-# # print(help(log))
+#
+# if __name__ == '__main__':
+#     # проверочки:
+#     @log('log.txt')
+#     def div (a,b):
+#         '''dididididi'''
+#         return a/b
+#     # g0 = print
+#     # g1 = sleep
+#     # g2 = timer_log(g0)
+#     # g3 = arguments_func_log(g0)
+#     # g4 = error_func_log(g0)
+#     #
+#     # g2(2)
+#     hhh = {'k':9,7:0}
+#     lst=[9,8,9]
+#     # g3(f"{hhh}боьлдо{lst}")
+#     div(3,1)
+#     # print(f'{div(3,5)}')
+#     # print(help(log))
+#
+#
+#
+# if __name__ == '__main__':
+#     import pytest
+#     def test_log_out(capsys):
+#
+#         result = log_out('123')
+#         out, err = capsys.readouterr()
+#         sys.stdout.write(out)
+#         sys.stderr.write(err)
+#
+#         assert out.startswith('123 ')
+#         assert result == None
+#
+#     def test_log(capsys):
+#
+#         @log()
+#         def add_numbers(a,b):
+#             return a + b
+#         result = add_numbers(2,7)
+#         out, err = capsys.readouterr()
+#         sys.stdout.write(out)
+#         sys.stderr.write(err)
+#
+#         assert out.startswith('add_numbers ok, 0.0 sec. \n')
+#         assert result == 9
+#
+#
+#
+#
+#
+#
+#
