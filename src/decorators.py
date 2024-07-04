@@ -3,7 +3,8 @@ from time import time
 
 
 def log_out(log_str: str, f_name: str = "", sep: str = " ") -> None:
-
+    """функция для вывода лога в файл если задан f_name
+    или в консоль, если не задан"""
     if f_name != "":
         with open(f_name, "a") as file:
             file.write(log_str + sep)
@@ -12,6 +13,8 @@ def log_out(log_str: str, f_name: str = "", sep: str = " ") -> None:
 
 
 def timer_log(f_name: str = ""):
+    """декоратор для логирования времени работы функции"""
+
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):
@@ -29,6 +32,8 @@ def timer_log(f_name: str = ""):
 
 
 def name_func_log(f_name=""):
+    """декоратор для логирования имени функции"""
+
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):
@@ -44,6 +49,8 @@ def name_func_log(f_name=""):
 
 
 def arguments_func_log(f_name=""):
+    """декоратор для логирования входящих аргументов функции"""
+
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):
@@ -60,6 +67,8 @@ def arguments_func_log(f_name=""):
 
 
 def error_func_log(f_name=""):
+    """декоратор для логирования ошибок функции"""
+
     def wrapper1(func):
         @wraps(func)
         def wrapper2(*args, **kwargs):

@@ -1,4 +1,5 @@
 import sys
+from time import time
 
 from src.decorators import arguments_func_log, error_func_log, log, log_out, name_func_log, timer_log
 
@@ -10,7 +11,7 @@ def test_log_out(capsys):
     sys.stderr.write(err)
 
     assert out.startswith("123 ")
-    assert result == None
+    assert result is None
 
 
 def test_timer_log(capsys):
@@ -18,12 +19,15 @@ def test_timer_log(capsys):
     def add_numbers(a, b):
         return a + b
 
+    start = time()
     result = add_numbers(2, 7)
+    run_time = time() - start
+    expected_result = f"{run_time} sec. "
     out, err = capsys.readouterr()
     sys.stdout.write(out)
     sys.stderr.write(err)
 
-    assert out.startswith("0.0 sec. ")
+    assert out.startswith(expected_result)
     assert result == 9
 
 
@@ -33,6 +37,7 @@ def test_name_func_log(capsys):
         return a + b
 
     result = add_numbers(2, 7)
+
     out, err = capsys.readouterr()
     sys.stdout.write(out)
     sys.stderr.write(err)
@@ -69,7 +74,7 @@ def test_error_func_log(capsys):
     assert result == 9
 
 
-def test_error_func_log(capsys):
+def test_error_f_log(capsys):
     @error_func_log()
     def div_numbers(a, b):
         return a / b
@@ -80,7 +85,7 @@ def test_error_func_log(capsys):
     sys.stderr.write(err)
 
     assert out.startswith("div_numbers error:  division by zero. Inputs: (2, 0), ")
-    assert result == None
+    assert result is None
 
 
 def test_log(capsys):
@@ -88,10 +93,14 @@ def test_log(capsys):
     def add_numbers(a, b):
         return a + b
 
+    start = time()
     result = add_numbers(2, 7)
+    run_time = time() - start
+    expected_result = f"add_numbers ok, {run_time} sec. \n"
+
     out, err = capsys.readouterr()
     sys.stdout.write(out)
     sys.stderr.write(err)
 
-    assert out.startswith("add_numbers ok, 0.0 sec. \n")
+    assert out.startswith(expected_result)
     assert result == 9

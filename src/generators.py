@@ -1,47 +1,50 @@
-'''функции для работы с массивами транзакций'''
-from typing import List, Iterable
+"""функции для работы с массивами транзакций"""
+
+from typing import Iterable, List
 
 from src.processing import sort_by_date
 
-def sign(x: int) -> int:
-    ''' знак числа'''
 
-    if x == 0: return 1
+def sign(x: int) -> int:
+    """знак числа"""
+
+    if x == 0:
+        return 1
+
     return int(x / abs(x))
 
 
-def filter_by_currency(transactions: List, currency: str) ->  Iterable:
-    ''' функция принимает список словарей с банковскими операциями
+def filter_by_currency(transactions: List, currency: str) -> Iterable:
+    """функция принимает список словарей с банковскими операциями
     (или объект-генератор, который выдает по одной банковской операции)
     и возвращает итератор, который выдает по очереди операции,
-    в которых указана заданная валюта.'''
-    k1 = 'operationAmount'
-    k2 = 'currency'
-    k3 = 'code'
-    return filter(lambda v : v[k1][k2][k3] == currency, sort_by_date(transactions))
+    в которых указана заданная валюта."""
+    k1 = "operationAmount"
+    k2 = "currency"
+    k3 = "code"
+    return filter(lambda v: v[k1][k2][k3] == currency, sort_by_date(transactions))
 
 
 def transaction_descriptions(transactions: List) -> Iterable:
+    """функция генератор, который принимает список словарей
+    и возвращает описание каждой операции по очереди."""
 
-    '''функция генератор, который принимает список словарей
-    и возвращает описание каждой операции по очереди.'''
-
-    return map(lambda v: v['description'], sort_by_date(transactions))
+    return map(lambda v: v["description"], sort_by_date(transactions))
 
 
 def card_number_generator(n_min: int, n_max: int) -> Iterable[str]:
-    '''функция генератор номеров банковских карт,
-       который должен генерировать номера карт в формате
-       XXXX XXXX XXXX XXXX, где X — цифра
-       диапазоны n_min, n_max
-       '''
+    """функция генератор номеров банковских карт,
+    который должен генерировать номера карт в формате
+    XXXX XXXX XXXX XXXX, где X — цифра
+    диапазоны n_min, n_max
+    """
     n_min = n_min * (n_min > 0)
     n_max = n_max * (n_max > 0)
 
     n_max += sign(n_max - n_min)
     for i in range(n_min, n_max, sign(n_max - n_min)):
-        card_number = '0' * (16 - len(str(i))) + str(i)
-        card_number = f'{card_number[0:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:]}'
+        card_number = "0" * (16 - len(str(i))) + str(i)
+        card_number = f"{card_number[0:4]} {card_number[4:8]} {card_number[8:12]} {card_number[12:]}"
         yield card_number
 
 
