@@ -5,7 +5,7 @@ def test_filter_by_state(l1, l1_e1):
     assert filter_by_state(l1) == l1_e1
 
 
-def test_filter_by_state(l1, l1_e2):
+def test_filter_by_st(l1, l1_e2):
     assert filter_by_state(l1, "CANCELED") == l1_e2
 
 

@@ -1,8 +1,6 @@
-from src.generators import filter_by_currency
-from src.widget import get_data, mask_account_card
+# from src.generators import filter_by_currency
 from src.masks import get_mask_account, get_mask_card_number
-
-
+from src.widget import get_data, mask_account_card
 
 if __name__ == "__main__":
     print(get_mask_card_number(1234567890123456))
@@ -19,4 +17,4 @@ if __name__ == "__main__":
     print(mask_account_card(s4))
 
     print(get_data("2018-07-11T02:26:18.671407"))
-    print(1+1)
+    print(1 + 1)

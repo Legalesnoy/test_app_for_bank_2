@@ -1,9 +1,9 @@
 def get_mask_card_number(card_number: int) -> str:
     """Функция маскирует номер карты и возвращается в формате XXXX XX** **** XXXX"""
     mask_card_number = ""
-    card_number_str=str(card_number)
+    card_number_str = str(card_number)
     if len(card_number_str) <= 16:
-        card_number_str='0'*(16-len(card_number_str))+card_number_str
+        card_number_str = "0" * (16 - len(card_number_str)) + card_number_str
 
     for i, symb in enumerate(list(card_number_str)):
         if i % 4 == 0:

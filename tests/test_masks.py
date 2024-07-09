@@ -8,11 +8,11 @@ def test_get_mask_card_number(num1, str_expected1):
     assert get_mask_card_number(num1) == str_expected1
 
 
-def test_get_mask_card_number(num2, str_expected2):
+def test_get_msk_crd_num(num2, str_expected2):
     assert get_mask_card_number(num2) == str_expected2
 
 
-def test_get_mask_card_number():
+def test_get_msk_c_num():
     assert get_mask_card_number(0) == "0000 00** **** 0000"
 
 
