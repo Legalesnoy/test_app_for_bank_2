@@ -6,6 +6,8 @@ from typing import Dict
 import requests
 from dotenv import load_dotenv
 
+from src.decorators import log
+
 load_dotenv()
 
 if __name__ == '__main__':
@@ -21,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG,
                     encoding='utf-8')
 convert_logger = logging.getLogger('app.external_api.convert_fin_transactions')
 
-
+@log('log.txt')
 def convert_fin_transactions(transaction: Dict) -> float:
     """функция, которая принимает на вход транзакцию
     и возвращает сумму транзакции (amount) в рублях"""
