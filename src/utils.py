@@ -35,7 +35,7 @@ def get_fin_transactions(file_path: str) -> List[Dict]:
     и возвращает список словарей с данными о финансовых транзакциях."""
     trans_lst = list(gen_fin_transactions(file_path))
 
-    get_trans_logger.info(f'всего транзакций:{len(trans_lst)}')
+    # get_trans_logger.info(f'всего транзакций:{len(trans_lst)}')
     return list(trans_lst)
 
 
